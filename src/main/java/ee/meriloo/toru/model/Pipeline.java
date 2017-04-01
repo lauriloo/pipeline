@@ -1,24 +1,22 @@
 package ee.meriloo.toru.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Pipeline {
 
-    private List<Double> pipes = new ArrayList<>();
-    private int index;
+    private List<Double> pipes;
+    private List<PipeJunction> pipeJunctions;
 
-    public Pipeline(List<Double> pipes) {
+    public Pipeline(List<Double> pipes, List<PipeJunction> pipeJunctions) {
         this.pipes = pipes;
-        index = 0;
+        this.pipeJunctions = pipeJunctions;
     }
 
-    public PipeJunction getNextJunction() throws Exception {
-        if (index + 2 >= pipes.size()) throw new Exception("No more Junctions");
-        PipeJunction pipeJunction = new PipeJunction();
-        pipeJunction.setFirstPipeDiameter(pipes.get(index++));
-        pipeJunction.setSecondPipeDiameter(pipes.get(index++));
-        return pipeJunction;
+    public List<Double> getPipes() {
+        return pipes;
     }
 
+    public List<PipeJunction> getPipeJunctions() {
+        return pipeJunctions;
+    }
 }
