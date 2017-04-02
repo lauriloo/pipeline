@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -37,14 +38,14 @@ public class Main {
 //        String input = "60, 120, 100, 75";
         String input = "100, 35, 75, 50, 80, 100, 37";
 //        String input = "70, 50, 60, 60, 55, 90";
-        List<Double> rectangleDimensions = main.inputParsingService.getRectangleDimension(input);
-        List<Double> pipesDiameters = main.inputParsingService.getPipesDiameters(input);
+        List<BigDecimal> rectangleDimensions = main.inputParsingService.getRectangleDimension(input);
+        List<BigDecimal> pipesDiameters = main.inputParsingService.getPipesDiameters(input);
         Rectangle rectangle = main.rectangleBuilder.buildRectangle(rectangleDimensions);
         Pipeline pipeline = main.pipelineBuilder.buildPipeLine(pipesDiameters);
         main.rectangleMovingService.moveToJunctionCorner(rectangle, pipeline.getJunctions().get(0));
 
         boolean slidingHasNotEnded = true;
-        Double step = rectangle.getLength() /100000;
+        BigDecimal step = rectangle.getLength().divide(BigDecimal.valueOf(100000.0));
         while (slidingHasNotEnded) {
             slidingHasNotEnded = main.rectangleSlidingService.slideRectangleRight(rectangle, pipeline.getJunctions().get(0), step);
         }

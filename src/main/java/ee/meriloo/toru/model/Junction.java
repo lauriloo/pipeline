@@ -1,20 +1,22 @@
 package ee.meriloo.toru.model;
 
+import java.math.BigDecimal;
+
 public class Junction {
 
-    private Double firstPipeDiameter;
-    private Double secondPipeDiameter;
+    private BigDecimal firstPipeDiameter;
+    private BigDecimal secondPipeDiameter;
 
-    public Junction(Double first, Double second) {
+    public Junction(BigDecimal first, BigDecimal second) {
         firstPipeDiameter = first;
         secondPipeDiameter = second;
     }
 
-    public Double getFirstPipeDiameter() {
+    public BigDecimal getFirstPipeDiameter() {
         return firstPipeDiameter;
     }
 
-    public Double getSecondPipeDiameter() {
+    public BigDecimal getSecondPipeDiameter() {
         return secondPipeDiameter;
     }
 

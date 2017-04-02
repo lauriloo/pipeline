@@ -5,6 +5,8 @@ import ee.meriloo.toru.model.Rectangle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class RectangleMovingService {
 
@@ -20,8 +22,8 @@ public class RectangleMovingService {
 
     public void moveToJunctionCorner(Rectangle rectangle, Junction junction) {
         moveToCoordZero(rectangle);
-        Double firstPipeDiameter = junction.getFirstPipeDiameter();
-        Double secondPipeDiameter = junction.getSecondPipeDiameter();
+        BigDecimal firstPipeDiameter = junction.getFirstPipeDiameter();
+        BigDecimal secondPipeDiameter = junction.getSecondPipeDiameter();
         rectangleMovingServiceHelper.moveLeft(rectangle, firstPipeDiameter);
         rectangleMovingServiceHelper.moveDown(rectangle, secondPipeDiameter);
     }

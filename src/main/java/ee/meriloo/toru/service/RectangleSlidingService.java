@@ -6,19 +6,21 @@ import ee.meriloo.toru.model.Point;
 import ee.meriloo.toru.model.Rectangle;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class RectangleSlidingService {
 
-    public boolean slideRectangleRight(Rectangle rectangle, Junction junction, Double step) {
+    public boolean slideRectangleRight(Rectangle rectangle, Junction junction, BigDecimal step) {
         Point newPointA = getNewPointA(rectangle, step);
         if (slidingHasEnded(rectangle, junction, newPointA)) return false;
 
 
-        Double axDistanceFromCorner = getAxDistanceFromCorner(newPointA, junction);
-        Double sinAlpha = getSinAlpha(axDistanceFromCorner, rectangle.getLength());
-        Double cosAlpha = getCosAlpha(axDistanceFromCorner, rectangle.getLength());
-        Double deltaX = getDeltaX(cosAlpha, rectangle.getWidth());
-        Double deltaY = getDeltaY(sinAlpha, rectangle.getWidth());
+        BigDecimal axDistanceFromCorner = getAxDistanceFromCorner(newPointA, junction);
+        BigDecimal sinAlpha = getSinAlpha(axDistanceFromCorner, rectangle.getLength());
+        BigDecimal cosAlpha = getCosAlpha(axDistanceFromCorner, rectangle.getLength());
+        BigDecimal deltaX = getDeltaX(cosAlpha, rectangle.getWidth());
+        BigDecimal deltaY = getDeltaY(sinAlpha, rectangle.getWidth());
 
         Point newPointB = getNewPointB(newPointA, deltaX, deltaY);
         Point newPointC = getNewPointC(cosAlpha, rectangle, junction);
@@ -32,48 +34,48 @@ public class RectangleSlidingService {
     }
 
     private boolean slidingHasEnded(Rectangle rectangle, Junction junction, Point newPointA) {
-        return getAxDistanceFromCorner(newPointA, junction) > rectangle.getLength();
+        return getAxDistanceFromCorner(newPointA, junction).compareTo(rectangle.getLength()) > 0;
     }
 
-    private Point getNewPointA(Rectangle rectangle, Double step) {
-        Double axNew = rectangle.getLeftDownCornerA().getxCoord() + step;
+    private Point getNewPointA(Rectangle rectangle, BigDecimal step) {
+        BigDecimal axNew = rectangle.getLeftDownCornerA().getxCoord().add(step);
         return new Point(axNew, rectangle.getLeftDownCornerA().getyCoord());
     }
 
-    private Point getNewPointB(Point newPointA, Double deltaX, Double deltaY) {
-        return new Point(newPointA.getxCoord() + deltaX, newPointA.getyCoord() + deltaY);
+    private Point getNewPointB(Point newPointA, BigDecimal deltaX, BigDecimal deltaY) {
+        return new Point(newPointA.getxCoord().add(deltaX), newPointA.getyCoord().add(deltaY));
     }
 
-    private Point getNewPointC(Double cosAlpha, Rectangle rectangle, Junction junction) {
-        Double cy = rectangle.getLength()*cosAlpha - junction.getSecondPipeDiameter();
-        Double cx = -junction.getFirstPipeDiameter();
+    private Point getNewPointC(BigDecimal cosAlpha, Rectangle rectangle, Junction junction) {
+        BigDecimal cy = rectangle.getLength().multiply(cosAlpha).subtract(junction.getSecondPipeDiameter());
+        BigDecimal cx = junction.getFirstPipeDiameter().negate();
         return new Point(cx, cy);
     }
 
-    private Point getNewPointD(Point newPointC, Double deltaX, Double deltaY) {
-        return new Point(newPointC.getxCoord() + deltaX, newPointC.getyCoord() + deltaY);
+    private Point getNewPointD(Point newPointC, BigDecimal deltaX, BigDecimal deltaY) {
+        return new Point(newPointC.getxCoord().add(deltaX), newPointC.getyCoord().add(deltaY));
     }
 
-    private Double getAxDistanceFromCorner(Point pointA, Junction junction) {
-        return junction.getFirstPipeDiameter() + pointA.getxCoord();
+    private BigDecimal getAxDistanceFromCorner(Point pointA, Junction junction) {
+        return junction.getFirstPipeDiameter().add(pointA.getxCoord());
     }
 
-    private Double getSinAlpha(Double axDistanceFromCorner, Double rectangleLength) {
-        return axDistanceFromCorner / rectangleLength;
+    private BigDecimal getSinAlpha(BigDecimal axDistanceFromCorner, BigDecimal rectangleLength) {
+        return axDistanceFromCorner.divide(rectangleLength);
     }
 
-    private Double getCosAlpha(Double axDistanceFromCorner, Double rectangleLength) {
-        Double sinAlpha = getSinAlpha(axDistanceFromCorner, rectangleLength);
-        double angle = Math.asin(sinAlpha);
-        return Math.cos(angle);
+    private BigDecimal getCosAlpha(BigDecimal axDistanceFromCorner, BigDecimal rectangleLength) {
+        BigDecimal sinAlpha = getSinAlpha(axDistanceFromCorner, rectangleLength);
+        double angle = Math.asin(sinAlpha.doubleValue());
+        return BigDecimal.valueOf(Math.cos(angle));
     }
 
-    private Double getDeltaX(Double cosAlpha, Double rectangleWidth) {
-        return rectangleWidth * cosAlpha;
+    private BigDecimal getDeltaX(BigDecimal cosAlpha, BigDecimal rectangleWidth) {
+        return rectangleWidth.multiply(cosAlpha);
     }
 
-    private Double getDeltaY(Double sinAlpha, Double rectangleWidth) {
-        return rectangleWidth * sinAlpha;
+    private BigDecimal getDeltaY(BigDecimal sinAlpha, BigDecimal rectangleWidth) {
+        return rectangleWidth.multiply(sinAlpha);
     }
 
 

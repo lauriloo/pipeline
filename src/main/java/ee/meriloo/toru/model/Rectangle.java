@@ -1,25 +1,27 @@
 package ee.meriloo.toru.model;
 
+import java.math.BigDecimal;
+
 public class Rectangle {
 
-    private Double length;
-    private Double width;
+    private BigDecimal length;
+    private BigDecimal width;
     private Point leftDownCornerA;
     private Point rightDownCornerB;
     private Point leftUpCornerC;
     private Point rightUpCornerD;
 
 
-    public Rectangle(Double length, Double shortSide) {
+    public Rectangle(BigDecimal length, BigDecimal shortSide) {
         this.length = length;
         this.width = shortSide;
     }
 
-    public Double getLength() {
+    public BigDecimal getLength() {
         return length;
     }
 
-    public Double getWidth() {
+    public BigDecimal getWidth() {
         return width;
     }
 
