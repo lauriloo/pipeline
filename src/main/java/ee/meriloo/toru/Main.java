@@ -2,6 +2,7 @@ package ee.meriloo.toru;
 
 import ee.meriloo.toru.model.Pipeline;
 import ee.meriloo.toru.model.Rectangle;
+import ee.meriloo.toru.service.RectangleSlidingService;
 import ee.meriloo.toru.service.input.InputParsingService;
 import ee.meriloo.toru.service.RectangleMovingService;
 import ee.meriloo.toru.service.builders.PipelineBuilder;
@@ -25,6 +26,8 @@ public class Main {
     private InputParsingService inputParsingService;
     @Autowired
     private RectangleMovingService rectangleMovingService;
+    @Autowired
+    private RectangleSlidingService rectangleSlidingService;
 
 
     public static void main(String[] args) throws Exception {
@@ -39,6 +42,13 @@ public class Main {
         Rectangle rectangle = main.rectangleBuilder.buildRectangle(rectangleDimensions);
         Pipeline pipeline = main.pipelineBuilder.buildPipeLine(pipesDiameters);
         main.rectangleMovingService.moveToJunctionCorner(rectangle, pipeline.getJunctions().get(0));
+
+        boolean slidingHasNotEnded = true;
+        Double step = rectangle.getLength() /100000;
+        while (slidingHasNotEnded) {
+            slidingHasNotEnded = main.rectangleSlidingService.slideRectangleRight(rectangle, pipeline.getJunctions().get(0), step);
+        }
+
         System.out.println();
 
     }
