@@ -40,7 +40,17 @@ public class RectangleMovingServiceHelper {
         point.setxCoord(point.getxCoord() - left);
     }
 
+    public void moveRight(Point point, Double right) {
+        point.setxCoord(point.getxCoord() + right);
+    }
+
     public void moveDown(Point point, Double down) {
         point.setyCoord(point.getyCoord() - down);
     }
+
+    public void moveUp(Point point, Double up) {
+        point.setyCoord(point.getyCoord() + up);
+    }
+
+    //public void turnLeftDownA(Point, )
 }
