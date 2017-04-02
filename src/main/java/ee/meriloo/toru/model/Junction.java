@@ -1,11 +1,11 @@
 package ee.meriloo.toru.model;
 
-public class PipeJunction {
+public class Junction {
 
     private Double firstPipeDiameter;
     private Double secondPipeDiameter;
 
-    public PipeJunction(Double first, Double second) {
+    public Junction(Double first, Double second) {
         firstPipeDiameter = first;
         secondPipeDiameter = second;
     }

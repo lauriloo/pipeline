@@ -2,7 +2,8 @@ package ee.meriloo.toru;
 
 import ee.meriloo.toru.model.Pipeline;
 import ee.meriloo.toru.model.Rectangle;
-import ee.meriloo.toru.service.InputParsingService;
+import ee.meriloo.toru.service.input.InputParsingService;
+import ee.meriloo.toru.service.RectangleMovingService;
 import ee.meriloo.toru.service.builders.PipelineBuilder;
 import ee.meriloo.toru.service.builders.RectangleBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,13 @@ public class Main {
 
 
     @Autowired
-    RectangleBuilder rectangleBuilder;
+    private RectangleBuilder rectangleBuilder;
     @Autowired
-    PipelineBuilder pipelineBuilder;
+    private PipelineBuilder pipelineBuilder;
     @Autowired
-    InputParsingService inputParsingService;
+    private InputParsingService inputParsingService;
+    @Autowired
+    private RectangleMovingService rectangleMovingService;
 
 
     public static void main(String[] args) throws Exception {
@@ -35,6 +38,7 @@ public class Main {
         List<Double> pipesDiameters = main.inputParsingService.getPipesDiameters(input);
         Rectangle rectangle = main.rectangleBuilder.buildRectangle(rectangleDimensions);
         Pipeline pipeline = main.pipelineBuilder.buildPipeLine(pipesDiameters);
+        main.rectangleMovingService.moveToJunctionCorner(rectangle, pipeline.getJunctions().get(0));
         System.out.println();
 
     }

@@ -1,7 +1,7 @@
 package ee.meriloo.toru.service.builders;
 
 
-import ee.meriloo.toru.model.PipeJunction;
+import ee.meriloo.toru.model.Junction;
 import ee.meriloo.toru.model.Pipeline;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +19,10 @@ public class PipelineBuilder {
         return pipes == null || pipes.size() < 2;
     }
 
-    private List<PipeJunction> getPipeJunctions(List<Double> pipes) {
-        List<PipeJunction> junctions = new ArrayList<>();
+    private List<Junction> getPipeJunctions(List<Double> pipes) {
+        List<Junction> junctions = new ArrayList<>();
         for(int index = 1; index < pipes.size(); index++) {
-            junctions.add(new PipeJunction(pipes.get(index -1), pipes.get(index)));
+            junctions.add(new Junction(pipes.get(index -1), pipes.get(index)));
         }
         return junctions;
     }

@@ -1,7 +1,7 @@
 package ee.meriloo.toru.service.builders;
 
 import ee.meriloo.toru.model.Rectangle;
-import ee.meriloo.toru.service.RectangleService;
+import ee.meriloo.toru.service.RectangleMovingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,11 @@ import java.util.List;
 public class RectangleBuilder {
 
     @Autowired
-    RectangleService rectangleService;
+    RectangleMovingService rectangleMovingService;
 
     public Rectangle buildRectangle(List<Double> dimensions) {
         Rectangle rectangle = baseBuild(dimensions.get(0), dimensions.get(1));
-        rectangleService.initCoordinates(rectangle);
+        rectangleMovingService.moveToCoordZero(rectangle);
         return rectangle;
     }
 

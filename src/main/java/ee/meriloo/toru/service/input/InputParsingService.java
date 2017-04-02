@@ -1,4 +1,4 @@
-package ee.meriloo.toru.service;
+package ee.meriloo.toru.service.input;
 
 import org.springframework.stereotype.Service;
 
