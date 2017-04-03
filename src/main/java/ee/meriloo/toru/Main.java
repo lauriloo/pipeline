@@ -4,6 +4,9 @@ import ee.meriloo.toru.service.MainService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * programmi testimiseks kirjuta sisendandmed INPUT stringi ja käivita main meetod.
+ */
 public class Main {
 
     private static final String INPUT = "60, 120, 100, 75";
