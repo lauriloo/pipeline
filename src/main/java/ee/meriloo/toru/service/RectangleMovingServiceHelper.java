@@ -9,16 +9,18 @@ import java.math.BigDecimal;
 @Service
 public class RectangleMovingServiceHelper {
 
-    public Point buildLeftDown(Rectangle rectangle) {
-        return new Point(BigDecimal.valueOf(0d), BigDecimal.valueOf(0d));
+    private static final double ZERO = 0.0;
+
+    public Point buildLeftDown() {
+        return new Point(BigDecimal.valueOf(ZERO), BigDecimal.valueOf(ZERO));
     }
 
     public Point buildRightDown(Rectangle rectangle) {
-        return new Point(rectangle.getWidth(), BigDecimal.valueOf(0d));
+        return new Point(rectangle.getWidth(), BigDecimal.valueOf(ZERO));
     }
 
     public Point buildLeftUp(Rectangle rectangle) {
-        return new Point(BigDecimal.valueOf(0d), rectangle.getLength());
+        return new Point(BigDecimal.valueOf(ZERO), rectangle.getLength());
     }
     public Point buildRightUp(Rectangle rectangle) {
         return new Point(rectangle.getWidth(), rectangle.getLength());
@@ -42,16 +44,7 @@ public class RectangleMovingServiceHelper {
         point.setxCoord(point.getxCoord().subtract(left));
     }
 
-    public void moveRight(Point point, BigDecimal right) {
-        point.setxCoord(point.getxCoord().add(right));
-    }
-
     public void moveDown(Point point, BigDecimal down) {
         point.setyCoord(point.getyCoord().subtract(down));
     }
-
-    public void moveUp(Point point, BigDecimal up) {
-        point.setyCoord(point.getyCoord().add(up));
-    }
-
 }

@@ -11,9 +11,11 @@ import java.util.*;
 @Service
 public class PipelineBuilder {
 
+    public static final String CAN_T_BUILD_PIPELINE = "Ei saa toru ehitada.";
+
     public Pipeline buildPipeLine(List<BigDecimal> pipes) throws Exception {
-        if (isNotValid(pipes)) throw new Exception("Can't build pipeline");
-        return new Pipeline(pipes, getPipeJunctions(pipes));
+        if (isNotValid(pipes)) throw new Exception(CAN_T_BUILD_PIPELINE);
+        return new Pipeline(getPipeJunctions(pipes));
     }
 
     private boolean isNotValid(List<BigDecimal> pipes) {

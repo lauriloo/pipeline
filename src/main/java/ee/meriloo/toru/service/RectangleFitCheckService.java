@@ -22,9 +22,10 @@ public class RectangleFitCheckService {
         double y2 = secondPoint.getyCoord().doubleValue();
         double y2MinusY1 = y2 - y1;
         double x1MinusX2 = x1 - x2;
-        if (x1MinusX2 == 0) System.out.println("ongi null");
-        double divide = y2MinusY1/x1MinusX2;
-        return BigDecimal.valueOf((divide*x1) + (y1));
+        if (x1MinusX2 == 0) {
+            x1MinusX2 = Double.MIN_VALUE;
+        }
+        double divide = y2MinusY1 / x1MinusX2;
+        return BigDecimal.valueOf((divide * x1) + (y1));
     }
-
 }

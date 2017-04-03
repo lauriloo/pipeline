@@ -21,8 +21,8 @@ public class RectangleBuilder {
     }
 
     private Rectangle baseBuild(BigDecimal oneSide, BigDecimal theOtherSide) {
-//        return oneSide > theOtherSide ? new Rectangle(oneSide, theOtherSide) : new Rectangle(theOtherSide, oneSide);
-        return oneSide.compareTo(theOtherSide) > 0 ? new Rectangle(oneSide, theOtherSide) : new Rectangle(theOtherSide, oneSide);
+        return oneSide.compareTo(theOtherSide) > 0 ? new Rectangle(oneSide, theOtherSide)
+                : new Rectangle(theOtherSide, oneSide);
     }
 
 }

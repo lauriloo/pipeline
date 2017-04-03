@@ -14,7 +14,7 @@ public class RectangleMovingService {
     private RectangleMovingServiceHelper rectangleMovingServiceHelper;
 
     public void moveToCoordZero(Rectangle rectangle) {
-        rectangle.setLeftDownCornerA(rectangleMovingServiceHelper.buildLeftDown(rectangle));
+        rectangle.setLeftDownCornerA(rectangleMovingServiceHelper.buildLeftDown());
         rectangle.setRightDownCornerB(rectangleMovingServiceHelper.buildRightDown(rectangle));
         rectangle.setLeftUpCornerC(rectangleMovingServiceHelper.buildLeftUp(rectangle));
         rectangle.setRightUpCornerD(rectangleMovingServiceHelper.buildRightUp(rectangle));

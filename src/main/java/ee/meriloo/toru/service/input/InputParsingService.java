@@ -10,11 +10,14 @@ import java.util.stream.Collectors;
 @Service
 public class InputParsingService {
 
+    private static final String NOT_VALID_INPUT = "Sisend pole valiidne: ";
+    private static final String DELIMITER = ",";
+
     public List<BigDecimal> getRectangleDimension(String input) throws Exception {
         try {
             return convertToList(input).subList(0, 2);
         } catch (Exception e) {
-            throw new Exception("Not valid input: " + input);
+            throw new Exception(NOT_VALID_INPUT + input);
         }
     }
 
@@ -23,12 +26,12 @@ public class InputParsingService {
             List<BigDecimal> inputNumbers = convertToList(input);
             return inputNumbers.subList(2, inputNumbers.size());
         } catch (Exception e) {
-            throw new Exception("Not valid input");
+            throw new Exception(NOT_VALID_INPUT);
         }
     }
 
     private List<BigDecimal> convertToList(String input) throws Exception{
-        List<String> inputAsList = Arrays.asList(input.split(","));
+        List<String> inputAsList = Arrays.asList(input.split(DELIMITER));
         List<BigDecimal> inputAsNumbers = inputAsList.stream()
                 .map(String::trim)
                 .map(e -> BigDecimal.valueOf(Double.valueOf(e)))
