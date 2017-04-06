@@ -26,6 +26,21 @@ public class RectangleMovingServiceHelper {
         return new Point(rectangle.getWidth(), rectangle.getLength());
     }
 
+    public Point buildLeftDownTurned() {
+        return buildLeftDown();
+    }
+
+    public Point buildRightDownTurned(Rectangle rectangle) {
+        return new Point(rectangle.getLength(), BigDecimal.valueOf(ZERO));
+    }
+
+    public Point buildLeftUpTurned(Rectangle rectangle) {
+        return new Point(BigDecimal.valueOf(ZERO), rectangle.getWidth());
+    }
+    public Point buildRightUpTurned(Rectangle rectangle) {
+        return new Point(rectangle.getLength(), rectangle.getWidth());
+    }
+
     public void moveLeft(Rectangle rectangle, BigDecimal left) {
         moveLeft(rectangle.getLeftDownCornerA(), left);
         moveLeft(rectangle.getRightDownCornerB(), left);
